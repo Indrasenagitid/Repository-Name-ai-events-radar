@@ -1,11 +1,12 @@
 Source,Events Count,Status,Last Checked,Message
-IndiaAI,11,Healthy,07-Jun-2026 00:33:48,Source returned events successfully
-MeitY,1,Healthy,07-Jun-2026 00:33:48,Source returned events successfully
-Google,11,Healthy,07-Jun-2026 00:33:48,Source returned events successfully
-NASSCOM,11,Healthy,07-Jun-2026 00:33:48,Source returned events successfully
-Devpost,11,Healthy,07-Jun-2026 00:33:48,Source returned events successfully
-Microsoft,11,Healthy,07-Jun-2026 00:33:48,Source returned events successfully
-NVIDIA,11,Healthy,07-Jun-2026 00:33:48,Source returned events successfully
-OpenAI,1,Healthy,07-Jun-2026 00:33:48,Source returned events successfully
-AWS,11,Healthy,07-Jun-2026 00:33:48,Source returned events successfully
-Internet Radar,10,Healthy,07-Jun-2026 00:33:48,Source returned events successfully
+IndiaAI,11,Healthy,07-Jun-2026 01:31:22,Source returned events successfully
+MeitY,1,Healthy,07-Jun-2026 01:31:22,Source returned events successfully
+Google,11,Healthy,07-Jun-2026 01:31:22,Source returned events successfully
+NASSCOM,11,Healthy,07-Jun-2026 01:31:22,Source returned events successfully
+Devpost,11,Healthy,07-Jun-2026 01:31:22,Source returned events successfully
+Microsoft,11,Healthy,07-Jun-2026 01:31:22,Source returned events successfully
+NVIDIA,11,Healthy,07-Jun-2026 01:31:22,Source returned events successfully
+OpenAI,1,Healthy,07-Jun-2026 01:31:22,Source returned events successfully
+AWS,11,Healthy,07-Jun-2026 01:31:22,Source returned events successfully
+Internet Radar,10,Healthy,07-Jun-2026 01:31:22,Source returned events successfully
+AI Jobs Radar,6,Healthy,07-Jun-2026 01:31:22,Source returned events successfully
