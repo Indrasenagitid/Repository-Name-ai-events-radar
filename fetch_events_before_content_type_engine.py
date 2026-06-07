@@ -24,41 +24,6 @@ from event_quality import (
 
 os.makedirs("archive", exist_ok=True)
 
-def classify_content_type(event):
-
-    event_name = str(event.get("Event", "")).lower()
-    event_type = str(event.get("Type", "")).lower()
-    source = str(event.get("Source", "")).lower()
-    register = str(event.get("Register", "")).lower()
-
-    text = f"{event_name} {event_type} {source} {register}"
-
-    if any(word in text for word in ["job", "jobs", "career", "careers", "naukri", "linkedin", "indeed", "foundit", "wellfound"]):
-        return "Job"
-
-    if any(word in text for word in ["release notes", "changelog", "releases", "release note"]):
-        return "ReleaseNote"
-
-    if any(word in text for word in ["news", "blog", "announcement", "announcements", "updates"]):
-        return "News"
-
-    if any(word in text for word in ["course", "training", "learning", "bootcamp", "certification", "certificate", "youtube", "krish naik", "campusx", "codebasics", "deeplearning"]):
-        return "Learning"
-
-    if any(word in text for word in ["tool", "tools", "github", "product hunt", "hugging face", "langchain", "crewai", "autogen", "llamaindex"]):
-        return "Tool"
-
-    if any(word in text for word in ["research", "paper", "papers", "papers with code", "arxiv"]):
-        return "Research"
-
-    if any(word in text for word in ["community", "forum", "social", "linkedin", "instagram"]):
-        return "Community"
-
-    if any(word in text for word in ["event", "events", "workshop", "webinar", "conference", "summit", "hackathon", "challenge"]):
-        return "Event"
-
-    return "Other"
-
 SOURCE_FUNCTIONS = [
     ("IndiaAI", get_indiaai_events),
     ("MeitY", get_meity_events),
@@ -114,7 +79,6 @@ for source_name, source_function in SOURCE_FUNCTIONS:
 
         for event in source_events:
             event["LastUpdated"] = current_time
-            event["ContentType"] = classify_content_type(event)
 
         events.extend(source_events)
 

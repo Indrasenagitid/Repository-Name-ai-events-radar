@@ -428,20 +428,18 @@ page = st.sidebar.radio(
     "Navigation",
     [
         "🏠 Dashboard",
-
         "📅 Events",
-        "💼 Jobs",
-        "📰 News",
-        "📢 Release Notes",
-
-        "🎓 Learning Hub",
-        "🧠 AI Sources Hub",
-
-        "🆕 New Events",
-        "📂 Archive",
-
         "📊 Analytics",
+        "🌐 Sources",
+        "🔎 Search",
+        "🤖 AI Assistant",
+        "📂 Archive",
+        "🧾 Event Details",
+        "🆕 New Events",
         "📡 Source Health",
+        "📰 Daily Digest",
+        "💼 AI Jobs Radar",
+        "🧠 AI Sources Hub",
         "⚙️ Platform Status"
     ]
 )

@@ -428,20 +428,18 @@ page = st.sidebar.radio(
     "Navigation",
     [
         "🏠 Dashboard",
-
         "📅 Events",
-        "💼 Jobs",
-        "📰 News",
-        "📢 Release Notes",
-
-        "🎓 Learning Hub",
-        "🧠 AI Sources Hub",
-
-        "🆕 New Events",
-        "📂 Archive",
-
         "📊 Analytics",
+        "🌐 Sources",
+        "🔎 Search",
+        "🤖 AI Assistant",
+        "📂 Archive",
+        "🧾 Event Details",
+        "🆕 New Events",
         "📡 Source Health",
+        "📰 Daily Digest",
+        "💼 AI Jobs Radar",
+        "🧠 AI Sources Hub",
         "⚙️ Platform Status"
     ]
 )
@@ -618,127 +616,32 @@ if page == "🏠 Dashboard":
 
 elif page == "📅 Events":
 
-    st.markdown('<div class="section-title">📅 All Active AI Opportunities</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">📅 All Active Events</div>', unsafe_allow_html=True)
 
-    c1, c2, c3, c4, c5 = st.columns(5)
+    c1, c2, c3, c4 = st.columns(4)
 
     with c1:
-        type_filter = st.selectbox(
-            "Category",
-            [
-                "All",
-                "Certification",
-                "Course",
-                "Bootcamp",
-                "Job",
-                "News",
-                "Release Notes",
-                "Tool",
-                "Research",
-                "Event",
-                "Workshop",
-                "Hackathon"
-            ]
-        )
-
+        type_filter = st.selectbox("Type", ["All"] + sorted(df["Type"].unique().tolist()))
     with c2:
-        fee_filter = st.selectbox(
-            "Fee Type",
-            [
-                "All",
-                "Free",
-                "Paid",
-                "Freemium",
-                "Check Website",
-                "Unknown"
-            ]
-        )
-
+        priority_filter = st.selectbox("Priority", ["All"] + sorted(df["Priority"].unique().tolist()))
     with c3:
-        priority_filter = st.selectbox(
-            "Priority",
-            ["All"] + sorted(df["Priority"].dropna().unique().tolist())
-        )
-
+        source_filter = st.selectbox("Source", ["All"] + sorted(df["Source"].unique().tolist()))
     with c4:
-        source_filter = st.selectbox(
-            "Source",
-            ["All"] + sorted(df["Source"].dropna().unique().tolist())
-        )
-
-    with c5:
-        status_filter = st.selectbox(
-            "Status",
-            ["All"] + sorted(df["Status"].dropna().unique().tolist())
-        )
+        status_filter = st.selectbox("Status", ["All"] + sorted(df["Status"].unique().tolist()))
 
     filtered_df = df.copy()
 
-    if fee_filter != "All":
-        if fee_filter == "Unknown":
-            filtered_df = filtered_df[
-                filtered_df["Fee"].astype(str).str.lower().isin(["unknown", "", "nan"])
-            ]
-        else:
-            filtered_df = filtered_df[
-                filtered_df["Fee"].astype(str).str.lower() == fee_filter.lower()
-            ]
-
+    if type_filter != "All":
+        filtered_df = filtered_df[filtered_df["Type"] == type_filter]
     if priority_filter != "All":
         filtered_df = filtered_df[filtered_df["Priority"] == priority_filter]
-
     if source_filter != "All":
         filtered_df = filtered_df[filtered_df["Source"] == source_filter]
-
     if status_filter != "All":
         filtered_df = filtered_df[filtered_df["Status"] == status_filter]
 
-    if type_filter != "All":
-
-        keyword_map = {
-            "Certification": ["certification", "certificate"],
-            "Course": ["course", "learning", "training"],
-            "Bootcamp": ["bootcamp"],
-            "Job": ["job", "career"],
-            "News": ["news", "blog", "announcement"],
-            "Release Notes": ["release notes", "changelog", "release"],
-            "Tool": ["tool", "tools", "github", "product hunt"],
-            "Research": ["research", "papers", "paper"],
-            "Event": ["event", "events"],
-            "Workshop": ["workshop", "webinar"],
-            "Hackathon": ["hackathon", "challenge"]
-        }
-
-        keywords = keyword_map.get(type_filter, [])
-
-        mask = False
-
-        for keyword in keywords:
-            mask = (
-                mask |
-                filtered_df["Event"].astype(str).str.lower().str.contains(keyword, na=False) |
-                filtered_df["Type"].astype(str).str.lower().str.contains(keyword, na=False)
-            )
-
-        filtered_df = filtered_df[mask]
-
-    st.markdown("### Filter Summary")
-
-    s1, s2, s3, s4 = st.columns(4)
-
-    with s1:
-        st.metric("Filtered Records", len(filtered_df))
-
-    with s2:
-        st.metric("Free", len(filtered_df[filtered_df["Fee"].astype(str).str.lower() == "free"]))
-
-    with s3:
-        st.metric("Paid", len(filtered_df[filtered_df["Fee"].astype(str).str.lower() == "paid"]))
-
-    with s4:
-        st.metric("Freemium", len(filtered_df[filtered_df["Fee"].astype(str).str.lower() == "freemium"]))
-
     show_table(filtered_df)
+
 
 elif page == "📊 Analytics":
 
